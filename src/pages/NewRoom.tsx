@@ -1,7 +1,6 @@
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg';
 
-
 import '../styles/auth.scss'
 import { Button } from '../components/Button';
 
@@ -28,7 +27,7 @@ export function NewRoom() {
             </Button>
           </form>
           <p>
-            Quer entrar em uma sala existente? <a href='#'>Clique aqui</a>
+            Quer entrar em uma sala existente? <a href='aa'>Clique aqui</a>
           </p>
         </div>
       </main>
