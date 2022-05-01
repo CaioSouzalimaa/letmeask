@@ -1,26 +1,31 @@
-//import { useLocation } from 'react-router-dom';
-import { auth, firebase } from '../services/firebase'
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg'
 
 import '../styles/auth.scss'
+
 import { Button } from '../components/Button';
-import { useNavigate } from 'react-router-dom';
+
+
 import "../services/firebase";
+
+import { AuthContext } from '../App';
+
 
 export function Home() {
   const navigate = useNavigate();
-
-  function handleCreateRoom() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider).then(result => {
-      console.log(result);
-      navigate('/rooms/new');
-    })
+  const { user, signInWithGoogle } = useContext(AuthContext)
 
 
+  async function handleCreateRoom() {
+    if (!user) {
+      await signInWithGoogle()
+    }
+
+    navigate('/rooms/new');
   }
 
   return (
@@ -31,6 +36,7 @@ export function Home() {
         <p>Tire as duvidas de sua audiência em tempo-real</p>
       </aside>
       <main>
+
         <div className='main-content'>
           <img src={logoImg} alt="Letmeask" />
 
